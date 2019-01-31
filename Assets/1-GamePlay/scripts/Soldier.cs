@@ -39,12 +39,10 @@ public class Soldier : MonoBehaviour
 
         MoveUpwards();
 
-        // TODO: Start shooting
         mAnimator.SetBool("shoot", true);
 
         Invoke("MoveDownwards", ShootTime);
     }
-
 
     private void MoveUpwards()
     {
