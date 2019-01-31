@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: fix
   m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
@@ -32,7 +32,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Parallax: 0.02
-    - _Shininess: 0.078125
+    - _Shininess: 0.037
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.05660379, g: 0.038714856, b: 0.038714856, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

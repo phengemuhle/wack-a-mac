@@ -7,17 +7,24 @@ public class Hud : MonoBehaviour {
     
     public Text mTxtHealth;
     public Text mTxtScore;
-    public Text mTxtCount;
+    public Text mTxtTime;
+    public RectTransform mPanelGameOver;
+    public Text mTxtGameOver;
 
 	// Use this for initialization
 	void Start () {
-		
+        GameController.Instance.GameOverEvent += OnGameOverEvent;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    private void OnGameOverEvent(object sender, System.EventArgs e)
+    {
+        mPanelGameOver.gameObject.SetActive(true);
+        mTxtGameOver.text = GameController.Instance.IsWon ? "YOU WIN!" : "YOU LOSE!";
+    }
 
+    // Update is called once per frame
+    void Update () {
+        mTxtScore.text = GameController.Instance.Score.ToString();
         mTxtHealth.text = GameController.Instance.Health.ToString();
-        mTxtCount.text = GameController.Instance.Count.ToString();
+        mTxtTime.text = GameController.Instance.Time.ToString();
     }
 }

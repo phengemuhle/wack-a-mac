@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootHandeler : MonoBehaviour {
+    private AudioSource mAudioSrc;
+
+    void Start()
+    {
+        mAudioSrc = GetComponent<AudioSource>();
+
+    }
+
 
     public void ShootEvent()
     {
@@ -10,7 +18,8 @@ public class ShootHandeler : MonoBehaviour {
 
         if(doShoot > 0)
         {
-            int damage = Random.Range(0, 6);
+            mAudioSrc.Play();
+            int damage = Random.Range(4, 15);
             GameController.Instance.SetDamage(damage);
         }
     }

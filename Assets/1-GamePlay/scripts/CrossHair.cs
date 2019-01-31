@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class CrossHair : MonoBehaviour
 {
-    //private Ray ray;
-    // Use this for initialization
+    private AudioSource mAudioSrc;
+
     void Start()
     {
         // Hide mouse cursor
         Cursor.visible = false;
+        GameController.Instance.GameOverEvent += OnGameOverEvent;
+        mAudioSrc = GetComponent<AudioSource>();
+    }
+    private void OnGameOverEvent(object sender, System.EventArgs e)
+    {
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,6 +27,7 @@ public class CrossHair : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            mAudioSrc.Play();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
@@ -29,7 +36,9 @@ public class CrossHair : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "Enemy")
                 {
+                    GameController.Instance.NewScore();
                     hit.transform.parent.GetComponent<Soldier>().Hit();
+
 
                 }
             }

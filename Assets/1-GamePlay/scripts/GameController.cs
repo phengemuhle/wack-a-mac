@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,20 @@ public class GameController : Singleton<GameController> {
     protected GameController() { }
 
     private int mHealth = 100;
-    private int mCount = 30;
+    private int mTime = 30;
     private bool mGameOver = false;
+    private int mScore = 0;
+
+    public event EventHandler GameOverEvent;
+
+    private void OnGameOver()
+    {
+        if(GameOverEvent != null)
+        {
+            GameOverEvent(this, EventArgs.Empty);
+        }
+    }
+
 
     private void Start()
     {
@@ -16,10 +29,15 @@ public class GameController : Singleton<GameController> {
     }
     private void Count()
     {
-        if(mCount == 0)
+        if(mTime == 0)
         {
             mGameOver = true;
             CancelInvoke("Count");
+            OnGameOver();
+        }
+        else
+        {
+            mTime--;
         }
     }
 
@@ -36,7 +54,18 @@ public class GameController : Singleton<GameController> {
             mHealth = 0;
             mGameOver = true;
             CancelInvoke("Count");
+            OnGameOver();
 
+        }
+    }
+
+    public bool IsWon
+    {
+        get
+        {
+            if (Health <= 0)
+                return false;
+            return true;
         }
     }
 
@@ -54,16 +83,18 @@ public class GameController : Singleton<GameController> {
     {
         get { return mHealth; }
     }
-    public int Count
+    public int Time
     {
-        get { return mCount; }
+        get { return mTime; }
+    }
+    public int Score
+    {
+        get { return mScore; }
+    }
+    public void NewScore()
+    {
+        mScore += 50;
     }
 
 
 }
-//public int Score
-//{
-//    get { return mScore; }
-//}
-
-//private int mScore = 0;
